@@ -10,26 +10,27 @@ function atomWithZustand<T>(store: StoreApi<T>, key = nanoid()) {
     effects: [
       ({ trigger, setSelf, onSet }) => {
         const subscribe = () => {
-          const callback = async () => {
+          const syncStore = () => {
             setSelf(store.getState());
           };
 
-          callback();
+          // call on mount
+          syncStore();
 
-          const unsub = store.subscribe(callback);
-
+          const unsub = store.subscribe(syncStore);
           return unsub;
         };
 
         if (trigger === "get") {
           subscribe();
         }
+
         onSet((newValue, _, isReset) => {
           if (isReset) {
             store.destroy();
           }
 
-          store.setState(newValue, true /* replace */);
+          store.setState(newValue, true);
         });
       }
     ]
