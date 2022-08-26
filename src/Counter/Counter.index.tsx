@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { CounterPresenter } from "./Counter.presenter";
-import { useCounter, useCounterAction } from "./Counter.state";
+import { store, useCounter, useCounterAction } from "./Counter.state";
 
 export const Counter: React.FC = () => {
   const { counter, multiplied } = useCounter();
@@ -8,7 +8,16 @@ export const Counter: React.FC = () => {
 
   // update count on mount
   // useEffect(() => {
-  //   update(5);
+  //   store.setState((s) => {
+  //     return {
+  //       counter: s.counter + 10
+  //     };
+  //   });
+  // }, []);
+
+  // same here. store instance is also subscribed.
+  // useEffect(() => {
+  //   update(30);
   // }, []);
 
   return (

@@ -8,7 +8,7 @@ type Store = {
   update: (newValue: number) => void;
 };
 
-const store = AtomWithZustand.createStore<Store>((set) => ({
+export const store = AtomWithZustand.createStore<Store>((set) => ({
   counter: 0,
   increment() {
     set((store) => {
@@ -43,12 +43,14 @@ const multipliedState = selector({
 });
 
 export const useCounter = () => {
+  // TODO: implement selector from store.
   const counter = useRecoilValue(counterStore).counter;
   const multiplied = useRecoilValue(multipliedState);
 
   return { counter, multiplied };
 };
 export const useCounterAction = () => {
+  // TODO: implement selector from store.
   const { incrementAsync, increment, update } = useRecoilValue(counterStore);
 
   return { incrementAsync, increment, update };
