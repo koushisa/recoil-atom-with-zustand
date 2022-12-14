@@ -22,7 +22,7 @@ function atomWithZustand<T>(store: StoreApi<T>, key = nanoid()) {
         };
 
         if (trigger === "get") {
-          subscribe();
+          return subscribe();
         }
 
         onSet((newValue, _, isReset) => {
